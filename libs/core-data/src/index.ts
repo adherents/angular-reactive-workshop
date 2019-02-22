@@ -8,5 +8,5 @@ export { Project } from './lib/projects/project.model';
 export { ProjectsService } from './lib/projects/projects.service';
 export { CustomersFacade } from './lib/state/customers/customers.facade';
 // Expose project state
-export { ProjectsState } from './lib/state/projects/projects.reducer';
-export { SelectProject, AddProject, UpdateProject, DeleteProject } from './lib/state/projects/projects.actions';
+export { ProjectsState, initialProjects } from './lib/state/projects/projects.reducer';
+export { SelectProject, LoadProjects, AddProject, UpdateProject, DeleteProject } from './lib/state/projects/projects.actions';

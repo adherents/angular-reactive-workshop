@@ -1,6 +1,6 @@
 # Angular Reactive Workshop
 
-For this workshop, we are going to build Redux state around the `projects` feature with NGRX.
+For this workshop, Redux state was built  around the `projects` feature with NGRX.
 
 ## The Stack
 

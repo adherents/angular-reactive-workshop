@@ -1,18 +1,7 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
 
 import { Customer, Project, NotificationsService, CustomersService, ProjectsFacade } from '@workshop/core-data';
-
-const emptyProject: Project = {
-  id: null,
-  title: '',
-  details: '',
-  percentComplete: 0,
-  approved: false,
-  customerId: null
-}
 
 @Component({
   selector: 'app-projects',
@@ -46,7 +35,7 @@ export class ProjectsComponent implements OnInit {
     this.facade.selectProject(project);
   }
 
-  cancel(project) {
+  cancel() {
     this.resetCurrentProject();
   }
 

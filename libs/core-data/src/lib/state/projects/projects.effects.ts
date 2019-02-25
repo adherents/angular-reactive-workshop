@@ -3,8 +3,10 @@ import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 import { map } from 'rxjs/operators';
 
-import { ProjectsActionTypes, LoadProjects, ProjectsLoaded, AddProject, ProjectAdded } from './projects.actions';
-import { ProjectsService, Project, ProjectsState } from '@workshop/core-data';
+import { ProjectsActionTypes, LoadProjects, ProjectsLoaded, AddProject, ProjectAdded, UpdateProject, ProjectUpdated, DeleteProject, ProjectDeleted } from './projects.actions';
+import { Project } from '../../projects/project.model';
+import { ProjectsService } from '../../projects/projects.service';
+import { ProjectsState } from './projects.reducer';
 
 @Injectable({providedIn: 'root'})
 export class ProjectsEffects {
@@ -24,6 +26,26 @@ export class ProjectsEffects {
       return this.projectsService.create(action.payload).pipe(map((res: Project) => new ProjectAdded(res)))
     },
     onError: (action: AddProject, error) => {
+      console.error('Error', error);
+    }
+  });
+
+  @Effect()
+  updateProject$ = this.dataPersistence.pessimisticUpdate(ProjectsActionTypes.UpdateProject, {
+    run: (action: UpdateProject, state: ProjectsState) => {
+      return this.projectsService.update(action.payload).pipe(map((res: Project) => new ProjectUpdated(res)))
+    },
+    onError: (action: UpdateProject, error) => {
+      console.error('Error', error);
+    }
+  });
+
+  @Effect()
+  deleteProject$ = this.dataPersistence.pessimisticUpdate(ProjectsActionTypes.DeleteProject, {
+    run: (action: DeleteProject, state: ProjectsState) => {
+      return this.projectsService.delete(action.payload).pipe(map((res: Project) => new ProjectDeleted(res)))
+    },
+    onError: (action: DeleteProject, error) => {
       console.error('Error', error);
     }
   });
